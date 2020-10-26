@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Qumrax</string>
+    <string name="take_photo">Take Photo</string>
+    <string name="textview">TextView</string>
+</resources>
