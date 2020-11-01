@@ -1,25 +1,26 @@
 package xyz.abdalrahman.qumrax2
 
+
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Bitmap
-
-
+import android.net.Uri
 import android.os.Bundle
-import android.text.Layout
 import android.util.Log
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.camera.core.*
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.ImageCapture
+import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.*
 import org.tensorflow.lite.support.common.FileUtil
 import xyz.abdalrahman.qumrax2.ml.SsdMobilenetV11Metadata1
-import java.io.File
-
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -39,11 +40,14 @@ class MainActivity : AppCompatActivity() {
             Permissions.requestCameraPermission(context)
         }
         cameraExecutor = Executors.newSingleThreadExecutor()
+
     }
     @SuppressLint("UnsafeExperimentalUsageError")
     private fun openCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(context)
-        val ssdMobilenetV11Metadata1: SsdMobilenetV11Metadata1 = SsdMobilenetV11Metadata1.newInstance(context)
+        val ssdMobilenetV11Metadata1: SsdMobilenetV11Metadata1 = SsdMobilenetV11Metadata1.newInstance(
+            context
+        )
         val model = Outputss(ssdMobilenetV11Metadata1, labelsPath)
         val converter = YuvToRgbConverter(context)
 
@@ -54,8 +58,8 @@ class MainActivity : AppCompatActivity() {
             val preview = Preview.Builder()
                 .build()
                 .also {
-                it.setSurfaceProvider(viewx.surfaceProvider)
-            }
+                    it.setSurfaceProvider(viewx.surfaceProvider)
+                }
             imageCapture = ImageCapture.Builder().build()
             val imageAnalyzer = ImageAnalysis.Builder()
                 .build()
@@ -93,7 +97,11 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
         cameraExecutor.shutdown()
     }
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
         if (Permissions.shouldShowRequestPermissionRationale(this)) {
             if (Permissions.hasCameraPermission(this)) {
                 openCamera()
@@ -106,6 +114,30 @@ class MainActivity : AppCompatActivity() {
                 finish()
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.help -> {
+                openHelp()
+                true
+            }
+            else -> true
+        }
+    }
+
+    private fun openHelp() {
+        val viewIntent = Intent(
+            "android.intent.action.VIEW",
+            Uri.parse("http://www.example.com")
+        )
+        startActivity(viewIntent)
     }
 }
 
