@@ -18,7 +18,8 @@ import kotlin.math.min
 class MapOutResults: View {
     constructor(context: Context,attributeSet: AttributeSet): super(context, attributeSet)
     constructor(context: Context): super(context)
-    private val THRESHOLD = .45F // minst 60 % en prediction måste ha för att visas på skärmen.
+    var THRESHOLD = .45F // minsta procent en prediction måste ha för att visas på skärmen.
+    var NUM_OBJECTS_DETECTED: Int = 8
     var elements = mutableListOf<Classifier.Recognition?>()
     private val paint = Paint().apply {
         style = Paint.Style.STROKE
@@ -31,12 +32,13 @@ class MapOutResults: View {
         textSize = 60f
     }
     override fun onDraw(canvas: Canvas?) {
-        canvas?.apply {
-            elements.forEach {
-                if (it?.getScore()!! > THRESHOLD) {
-                    val location = it.getLocation()
-                    drawRect(location, paint )
-                    drawText(it.getTitle_() + " " + it.getRoundedScore(), location.left, location.top + 50, text)
+        for ((index, value) in elements.withIndex()){
+            if (index < NUM_OBJECTS_DETECTED){
+                if (value?.getScore()!! > THRESHOLD){
+                    val location = value.getLocation()
+                    canvas?.drawRect(location, paint)
+                    canvas?.drawText(value.getTitle_() + " " + value.getRoundedScore(), location.left, location.top + 50, text)
+
                 }
             }
         }

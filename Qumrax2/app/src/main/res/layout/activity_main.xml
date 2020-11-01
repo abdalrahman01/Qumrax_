@@ -12,12 +12,55 @@
     <androidx.camera.view.PreviewView
         android:id="@+id/viewx"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        >
+
+    </androidx.camera.view.PreviewView>
 
     <xyz.abdalrahman.qumrax2.MapOutResults
         android:id="@+id/mapOut"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="152dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/min_accu_lbl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/min_accuracy"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp" />
+
+        <SeekBar
+            android:id="@+id/min_accu_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:max="100"/>
+
+        <TextView
+            android:id="@+id/object_to_be_detected"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/object_to_be_detected"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"/>
+        <SeekBar
+            android:id="@+id/object_to_be_detected_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:max="8"/>
+
+    </LinearLayout>
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

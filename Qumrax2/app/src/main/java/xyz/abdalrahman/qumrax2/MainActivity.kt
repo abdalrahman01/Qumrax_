@@ -1,6 +1,7 @@
 package xyz.abdalrahman.qumrax2
 
 
+import android.R.id.message
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
@@ -10,6 +11,8 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.SeekBar
+import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.CameraSelector
@@ -23,6 +26,7 @@ import org.tensorflow.lite.support.common.FileUtil
 import xyz.abdalrahman.qumrax2.ml.SsdMobilenetV11Metadata1
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+
 
 class MainActivity : AppCompatActivity() {
     private var imageCapture: ImageCapture? = null
@@ -40,6 +44,61 @@ class MainActivity : AppCompatActivity() {
             Permissions.requestCameraPermission(context)
         }
         cameraExecutor = Executors.newSingleThreadExecutor()
+
+
+        min_accu_scroll.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
+            /**
+             * Notification that the progress level has changed. Clients can use the fromUser parameter
+             * to distinguish user-initiated changes from those that occurred programmatically.
+             *
+             * @param seekBar The SeekBar whose progress has changed
+             * @param progress The current progress level. This will be in the range min..max where min
+             * and max were set by [ProgressBar.setMin] and
+             * [ProgressBar.setMax], respectively. (The default values for
+             * min is 0 and max is 100.)
+             * @param fromUser True if the progress change was initiated by the user.
+             */
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                mapOut.THRESHOLD = progress/100f
+                min_accu_lbl.text = getString(R.string.min_accuracy) + ": " + progress
+            }
+
+            /**
+             * Notification that the user has started a touch gesture. Clients may want to use this
+             * to disable advancing the seekbar.
+             * @param seekBar The SeekBar in which the touch gesture began
+             */
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+            /**
+             * Notification that the user has finished a touch gesture. Clients may want to use this
+             * to re-enable advancing the seekbar.
+             * @param seekBar The SeekBar in which the touch gesture began
+             */
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+
+            }
+
+        })
+        object_to_be_detected_scroll.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+
+                mapOut.NUM_OBJECTS_DETECTED = progress
+                object_to_be_detected.text =
+                    getString(R.string.object_to_be_detected) + ": " + progress
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                //TODO("Not yet implemented")
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                //TODO("Not yet implemented")
+            }
+
+        } )
 
     }
     @SuppressLint("UnsafeExperimentalUsageError")
@@ -124,7 +183,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.help -> {
+            R.id.about -> {
                 openHelp()
                 true
             }
