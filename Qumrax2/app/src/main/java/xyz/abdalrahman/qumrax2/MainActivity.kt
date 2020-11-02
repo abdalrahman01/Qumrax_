@@ -148,7 +148,7 @@ class MainActivity : AppCompatActivity() {
                     this, cameraSelector, preview, imageCapture, imageAnalyzer
                 )
             } catch (exc: Exception) {
-                Log.e("TAG", "Use case binding failed", exc)
+
             }
         }, ContextCompat.getMainExecutor(this))
     }
@@ -194,7 +194,7 @@ class MainActivity : AppCompatActivity() {
     private fun openHelp() {
         val viewIntent = Intent(
             "android.intent.action.VIEW",
-            Uri.parse("http://www.example.com")
+            Uri.parse("http://www.abdalrahman.xyz/#about")
         )
         startActivity(viewIntent)
     }
