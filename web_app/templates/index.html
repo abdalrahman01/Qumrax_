@@ -10,8 +10,7 @@
 </head>
 
 <body>
-    <div class="content">
-        <!-- Image and text -->
+    <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="#"><img src="../static/images/ic_qumrax.png" width="40" height="40"
                     class="d-inline-block align-top" alt="logo Qx" loading="lazy">
@@ -23,40 +22,38 @@
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
                     <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-                    <a class="nav-link" href="#Download">Downlaod</a>
-                    <a class="nav-link" href="#">Features</a>
-                    <a class="nav-link" href="#">About</a>
-                    
+                    <a class="nav-link" href="#download">Downlaod</a>
+                    <a class="nav-link" href="#features">Features</a>
+                    <a class="nav-link" href="#about">About</a>
+    
                 </div>
             </div>
         </nav>
-
-        <div class="row" id="About">
-           
-        </div>
-        <div class="row" id="Features">
-
-        </div>
-        <div class="row" id="Downlaod">
-            <a href="/download" target="blank">
-                <button type="button" class="btn btn-secondary btn-lg btn-block">Block level button</button>
-            </a>
-           
-        </div>
-        
-        
-
-
-
-
-
-
-        <footer class="footer mt-auto py-3">
+    </header>
+    <main>
+        <section class="jumbotron text-center">
             <div class="container">
-                <span class="text-muted">Place sticky footer content here.</span>
+                <h1>QumraX</h1>
+                <p class="lead text-muted">Something short and leading about the collection below—its contents, the
+                    creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it
+                    entirely.</p>
+                <p>
+                    <a href="{{url_for('download')}}" class="btn btn-primary my-2">Download APK</a>
+                    <a href="#" class="btn btn-secondary my-2">Github's repo</a>
+                </p>
             </div>
-        </footer>
-    </div>
+        </section>
+    </main>
+
+
+
+    <footer class="footer mt-auto py-3">
+        <div class="container">
+            <span class="text-muted">abdalrahman.xyz</span>
+
+        </div>
+    </footer>
+
 
 
 
