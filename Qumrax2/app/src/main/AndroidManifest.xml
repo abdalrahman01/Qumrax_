@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="xyz.abdalrahman.qumrax2"
-    android:versionCode="1"
-    android:versionName="first_release">
+    >
 
     <application
         android:allowBackup="true"
@@ -12,10 +11,10 @@
         android:roundIcon="@mipmap/ic_qumrax_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:debuggable="false"
+
 
         tools:ignore="HardcodedDebugMode">
-        <activity android:name=".MainActivity" android:configChanges="orientation" android:screenOrientation="portrait">
+        <activity android:name=".MainActivity" android:configChanges="orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

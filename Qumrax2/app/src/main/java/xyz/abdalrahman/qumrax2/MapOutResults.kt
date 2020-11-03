@@ -11,19 +11,17 @@ import android.view.View
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.view.*
-import kotlin.math.abs
-import kotlin.math.max
-import kotlin.math.min
+
 
 class MapOutResults: View {
     constructor(context: Context,attributeSet: AttributeSet): super(context, attributeSet)
     constructor(context: Context): super(context)
-    var THRESHOLD = .45F // minsta procent en prediction måste ha för att visas på skärmen.
+    var THRESHOLD = .45f // minsta procent en prediction måste ha för att visas på skärmen.
     var NUM_OBJECTS_DETECTED: Int = 8
-    var elements = mutableListOf<Classifier.Recognition?>()
+    private var elements = mutableListOf<Classifier.Recognition?>()
     private val paint = Paint().apply {
         style = Paint.Style.STROKE
-        color = ContextCompat.getColor(context, android.R.color.holo_red_dark)
+        color = ContextCompat.getColor(context, android.R.color.white)
         strokeWidth = 10f
     }
     private val text = Paint().apply {
@@ -31,14 +29,22 @@ class MapOutResults: View {
         color = ContextCompat.getColor(context, android.R.color.black)
         textSize = 60f
     }
+    private val textBackgroundColorSpan = Paint().apply {
+        style = Paint.Style.FILL
+        color = ContextCompat.getColor(context, android.R.color.holo_red_dark)
+    }
     override fun onDraw(canvas: Canvas?) {
-        for ((index, value) in elements.withIndex()){
-            if (index < NUM_OBJECTS_DETECTED){
-                if (value?.getScore()!! > THRESHOLD){
-                    val location = value.getLocation()
-                    canvas?.drawRect(location, paint)
-                    canvas?.drawText(value.getTitle_() + " " + value.getRoundedScore(), location.left, location.top + 50, text)
+        if (elements.isNotEmpty())
+        for (x in 0 until NUM_OBJECTS_DETECTED){
+            val value =  elements[x]
+            if (value?.getScore()!! > THRESHOLD){
+                val location = value.getLocation()
+                val label = "${value.getTitle_()} ${value.getScore().times(100).toInt()}%"
 
+                canvas?.apply {
+                    drawRect(location, paint)
+                    drawRect(location.left,location.top,location.right, location.top.minus(50),textBackgroundColorSpan)
+                    drawText(label,location.left, location.top , text)
                 }
             }
         }
@@ -54,6 +60,7 @@ class MapOutResults: View {
         mapOut.invalidate()
 
     }
+
     private fun mapPredictionsCoordinateToView(location: RectF, window: PreviewView): RectF {
 
         // 300 * 300  is the image were fed into the tflite model

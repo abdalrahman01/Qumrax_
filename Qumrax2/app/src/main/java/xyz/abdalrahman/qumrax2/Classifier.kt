@@ -26,7 +26,7 @@ interface Classifier {
         }
         fun getTitle_(): String = title
         fun getScore(): Float = confidence
-        fun getRoundedScore(): Double = (confidence * 100).toDouble()
+
         override fun toString(): String {
             return "[$id] $title ${confidence * 100.0f} $location"
         }

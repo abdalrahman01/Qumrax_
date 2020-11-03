@@ -1,13 +1,14 @@
 package xyz.abdalrahman.qumrax2
 
 
-import android.R.id.message
+
+
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
+
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -38,6 +39,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        if (context.resources.configuration.orientation == 1){
+            Toast.makeText(
+                this,
+                "it is best in landscape mode",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+
         if (Permissions.hasCameraPermission(context)) {
             openCamera()
         } else {
@@ -47,20 +57,11 @@ class MainActivity : AppCompatActivity() {
 
 
         min_accu_scroll.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
-            /**
-             * Notification that the progress level has changed. Clients can use the fromUser parameter
-             * to distinguish user-initiated changes from those that occurred programmatically.
-             *
-             * @param seekBar The SeekBar whose progress has changed
-             * @param progress The current progress level. This will be in the range min..max where min
-             * and max were set by [ProgressBar.setMin] and
-             * [ProgressBar.setMax], respectively. (The default values for
-             * min is 0 and max is 100.)
-             * @param fromUser True if the progress change was initiated by the user.
-             */
+
+            @SuppressLint("SetTextI18n")
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                mapOut.THRESHOLD = progress/100f
-                min_accu_lbl.text = getString(R.string.min_accuracy) + ": " + progress
+                mapOut.THRESHOLD = progress/100.0f
+                min_accu_lbl.text = "${getString(R.string.min_accuracy)}: $progress"
             }
 
             /**
@@ -83,6 +84,7 @@ class MainActivity : AppCompatActivity() {
 
         })
         object_to_be_detected_scroll.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
+            @SuppressLint("SetTextI18n")
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
 
                 mapOut.NUM_OBJECTS_DETECTED = progress
@@ -119,11 +121,13 @@ class MainActivity : AppCompatActivity() {
                 .also {
                     it.setSurfaceProvider(viewx.surfaceProvider)
                 }
+
+
             imageCapture = ImageCapture.Builder().build()
             val imageAnalyzer = ImageAnalysis.Builder()
                 .build()
                 .also { imageAnalysis ->
-                    imageAnalysis.setAnalyzer(cameraExecutor, ImageAnalysis.Analyzer { imageProxy ->
+                    imageAnalysis.setAnalyzer(cameraExecutor, {imageProxy ->
                         val bitmap: Bitmap = Bitmap.createBitmap(
                             imageProxy.width,
                             imageProxy.height,
