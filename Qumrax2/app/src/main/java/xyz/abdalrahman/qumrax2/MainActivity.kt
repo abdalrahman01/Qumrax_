@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         if (context.resources.configuration.orientation == 1){
             Toast.makeText(
                 this,
-                "it is best in landscape mode",
+                getString(R.string.best_option),
                 Toast.LENGTH_LONG
             ).show()
         }
@@ -61,26 +61,11 @@ class MainActivity : AppCompatActivity() {
             @SuppressLint("SetTextI18n")
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
                 mapOut.THRESHOLD = progress/100.0f
-                min_accu_lbl.text = "${getString(R.string.min_accuracy)}: $progress"
+                min_accu_lbl.text = "${getString(R.string.min_accuracy)}: ${progress}%"
             }
 
-            /**
-             * Notification that the user has started a touch gesture. Clients may want to use this
-             * to disable advancing the seekbar.
-             * @param seekBar The SeekBar in which the touch gesture began
-             */
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-
-            }
-
-            /**
-             * Notification that the user has finished a touch gesture. Clients may want to use this
-             * to re-enable advancing the seekbar.
-             * @param seekBar The SeekBar in which the touch gesture began
-             */
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-
-            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
 
         })
         object_to_be_detected_scroll.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
@@ -92,13 +77,8 @@ class MainActivity : AppCompatActivity() {
                     getString(R.string.object_to_be_detected) + ": " + progress
             }
 
-            override fun onStartTrackingTouch(seekBar: SeekBar?) {
-                //TODO("Not yet implemented")
-            }
-
-            override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                //TODO("Not yet implemented")
-            }
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
 
         } )
 

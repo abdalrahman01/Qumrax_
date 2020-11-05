@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Qumrax</string>
-    <string name="take_photo">Ta Foto</string>
-    <string name="min_accuracy">Min noggrannhet</string>
-    <string name="object_to_be_detected">Föremål som ska upphittas</string>
+    <string name="min_accuracy">Noggrannhet</string>
+    <string name="object_to_be_detected">Hur många föremål</string>
     <string name="about">om</string>
+    <string name="best_option">Det är bättre i landskapsläge</string>
 </resources>
