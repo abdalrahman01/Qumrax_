@@ -9,8 +9,8 @@ android {
         applicationId "xyz.abdalrahman.qumrax2"
         minSdkVersion 25
         targetSdkVersion 29
-        versionCode 1
-        versionName "first release 1.0"
+        versionCode 2
+        versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
