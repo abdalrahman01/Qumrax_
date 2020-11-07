@@ -28,9 +28,9 @@
         android:id="@+id/sittings"
         android:layout_width="match_parent"
         android:layout_height="152dp"
-        android:layout_marginBottom="10dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="10dp">
 
         <TextView
             android:id="@+id/min_accu_lbl"
