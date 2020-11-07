@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -13,7 +14,7 @@
         android:id="@+id/viewx"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
+        android:clickable="true">
 
     </androidx.camera.view.PreviewView>
 
@@ -24,8 +25,10 @@
         />
 
     <LinearLayout
+        android:id="@+id/sittings"
         android:layout_width="match_parent"
         android:layout_height="152dp"
+        android:layout_marginBottom="10dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent">
 
@@ -41,8 +44,8 @@
             android:id="@+id/min_accu_scroll"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:max="100"/>
+            android:max="100"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
             android:id="@+id/object_to_be_detected"
@@ -50,13 +53,14 @@
             android:layout_height="wrap_content"
             android:text="@string/object_to_be_detected"
             android:textColor="#FFFFFF"
-            android:textSize="24sp"/>
+            android:textSize="24sp" />
+
         <SeekBar
             android:id="@+id/object_to_be_detected_scroll"
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:max="8"/>
+            android:max="8"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </LinearLayout>
 

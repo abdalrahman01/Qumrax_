@@ -12,6 +12,9 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
+import android.view.View.SYSTEM_UI_FLAG_IMMERSIVE
+import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.Toast
@@ -34,6 +37,8 @@ class MainActivity : AppCompatActivity() {
     private val context = this@MainActivity
     private lateinit var cameraExecutor: ExecutorService
     private val labelsPath by lazy { FileUtil.loadLabels(this, "labels.txt") }
+
+    private var isFullScreen = true
     // Select back camera as a default
     private val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -81,6 +86,13 @@ class MainActivity : AppCompatActivity() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
 
         } )
+        viewx.setOnClickListener {
+            isFullScreen = !isFullScreen
+            if (isFullScreen)
+                showSystemUI()
+            else
+                hideSystemUI()
+        }
 
     }
     @SuppressLint("UnsafeExperimentalUsageError")
@@ -181,6 +193,37 @@ class MainActivity : AppCompatActivity() {
             Uri.parse("http://www.abdalrahman.xyz/#about")
         )
         startActivity(viewIntent)
+    }
+
+
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+
+
+
+    }
+
+    private fun hideSystemUI() {
+        // Enables regular immersive mode.
+        // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
+        // Or for "sticky immersive," replace it with SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        window.decorView.systemUiVisibility = (SYSTEM_UI_FLAG_IMMERSIVE
+                // Set the content to appear under the system bars so that the
+                // content doesn't resize when the system bars hide and show.
+                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                // Hide the nav bar and status bar
+                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_FULLSCREEN)
+    }
+    private fun showSystemUI() {
+
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
+
     }
 }
 
