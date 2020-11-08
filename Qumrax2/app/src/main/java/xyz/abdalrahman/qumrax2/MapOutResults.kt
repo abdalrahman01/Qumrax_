@@ -33,6 +33,14 @@ class MapOutResults: View {
         style = Paint.Style.FILL
         color = ContextCompat.getColor(context, android.R.color.holo_red_dark)
     }
+    private val circlePaint1 = Paint().apply {
+        style = Paint.Style.FILL
+        color = ContextCompat.getColor(context, android.R.color.holo_green_light)
+    }
+    private val circlePaint2 = Paint().apply {
+        style = Paint.Style.FILL
+        color = ContextCompat.getColor(context, android.R.color.holo_purple)
+    }
     override fun onDraw(canvas: Canvas?) {
         if (elements.isNotEmpty())
         for (x in 0 until NUM_OBJECTS_DETECTED){
@@ -44,8 +52,10 @@ class MapOutResults: View {
 
                 canvas?.apply {
                     drawRect(location, paint)
-                    drawRect(location.left,location.top,location.right, location.top.minus(50),textBackgroundColorSpan)
-                    drawText(label,location.left, location.top , text)
+                    drawRect(location.left,location.top,location.right, location.top.plus(80),textBackgroundColorSpan)
+                    drawText(label, location.left,location.top.plus(75),text)
+                    drawCircle(location.left,location.top,18f,circlePaint1)
+                    drawCircle(location.right,location.bottom,18f,circlePaint2)
                 }
             }
         }
@@ -53,9 +63,29 @@ class MapOutResults: View {
 
     private fun rotateRect(location: RectF): RectF {
         //rotate the Rectangle
+        val rotatedLocation = RectF().apply {
+
+            if (location.right < location.left) {
+                left = location.right
+                right = location.left
+            } else {
+                left = location.left
+                right = location.right
+            }
+            if (location.bottom < location.top) {
+                top = location.bottom
+                bottom = location.top
+            } else {
+                top = location.top
+                bottom = location.bottom
+            }
 
 
-        return location
+        }
+
+
+
+        return rotatedLocation
     }
 
     fun drawOnScreen(element: List<Classifier.Recognition?>? , window: PreviewView){
