@@ -5,4 +5,5 @@
     <string name="about">عن</string>
     <string name="best_option">أفضل في وضع الشاشة العريضية</string>
     <string name="object_to_be_detected">عدد الاشياء</string>
+    <string name="full_screen_mode">" وضع ملء الشاشة"</string>
 </resources>

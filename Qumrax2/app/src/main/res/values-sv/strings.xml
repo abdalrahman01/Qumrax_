@@ -5,4 +5,5 @@
     <string name="object_to_be_detected">Hur många föremål</string>
     <string name="about">om</string>
     <string name="best_option">Det är bättre i landskapsläge</string>
+    <string name="full_screen_mode">Fullskärmsläge</string>
 </resources>

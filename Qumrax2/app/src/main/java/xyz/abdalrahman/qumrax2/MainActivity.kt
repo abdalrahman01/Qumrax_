@@ -66,6 +66,7 @@ class MainActivity : AppCompatActivity() {
         min_accu_lbl.text = "${getString(R.string.min_accuracy)}: 45%"
         object_to_be_detected.text = "${getString(R.string.object_to_be_detected)}: 8"
 
+
         min_accu_scroll.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
 
             @SuppressLint("SetTextI18n")
@@ -91,12 +92,13 @@ class MainActivity : AppCompatActivity() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {}
 
         } )
-        viewx.setOnClickListener {
-            isFullScreen = !isFullScreen
-            if (isFullScreen)
-                showSystemUI()
-            else
+
+
+        switch1.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked)
                 hideSystemUI()
+            else
+                showSystemUI()
         }
 
 
@@ -212,7 +214,7 @@ class MainActivity : AppCompatActivity() {
                 // Hide the nav bar and status bar
                 or SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 or SYSTEM_UI_FLAG_FULLSCREEN)
-        sittings.visibility = INVISIBLE
+        sittings.visibility = GONE
     }
     private fun showSystemUI() {
 

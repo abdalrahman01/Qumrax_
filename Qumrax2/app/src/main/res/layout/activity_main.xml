@@ -14,7 +14,7 @@
         android:id="@+id/viewx"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clickable="true">
+        >
 
     </androidx.camera.view.PreviewView>
 
@@ -23,6 +23,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/full_screen_mode"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/sittings"
+        app:layout_constraintEnd_toEndOf="@+id/viewx" />
 
     <LinearLayout
         android:id="@+id/sittings"
