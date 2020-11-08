@@ -12,9 +12,9 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
+
 import android.view.View.*
-import android.widget.LinearLayout
+
 import android.widget.SeekBar
 import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.Toast
@@ -25,12 +25,9 @@ import androidx.camera.core.ImageCapture
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
-import androidx.core.view.isInvisible
-import androidx.core.view.isVisible
-import androidx.core.view.marginBottom
-import androidx.core.view.marginStart
+
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.view.*
+
 import org.tensorflow.lite.support.common.FileUtil
 import xyz.abdalrahman.qumrax2.ml.SsdMobilenetV11Metadata1
 import java.util.concurrent.ExecutorService
@@ -46,6 +43,7 @@ class MainActivity : AppCompatActivity() {
     private var isFullScreen = true
     // Select back camera as a default
     private val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -65,6 +63,8 @@ class MainActivity : AppCompatActivity() {
         }
         cameraExecutor = Executors.newSingleThreadExecutor()
 
+        min_accu_lbl.text = "${getString(R.string.min_accuracy)}: 45%"
+        object_to_be_detected.text = "${getString(R.string.object_to_be_detected)}: 8"
 
         min_accu_scroll.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
 
@@ -102,9 +102,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
     @SuppressLint("UnsafeExperimentalUsageError")
     private fun openCamera() {
         val cameraProviderFuture = ProcessCameraProvider.getInstance(context)
