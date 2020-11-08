@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        if (context.resources.configuration.orientation == 1){
+        if (isPortrait()){
             Toast.makeText(
                 context,
                 getString(R.string.best_option),
@@ -103,6 +103,8 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+
 
     @SuppressLint("UnsafeExperimentalUsageError")
     private fun openCamera() {
@@ -221,10 +223,16 @@ class MainActivity : AppCompatActivity() {
         window.decorView.systemUiVisibility = (SYSTEM_UI_FLAG_LAYOUT_STABLE
                 or SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 or SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
-        if (context.resources.configuration.orientation == 1)
+        if (isPortrait())
             sittings.translationY = -100F
+        if (!isPortrait())
+            switch1.translationX = -100f
         sittings.visibility = VISIBLE
 
+    }
+    private fun isPortrait(): Boolean{
+        // returns true if it is in portrait mode
+        return (context.resources.configuration.orientation == 1)
     }
 }
 
