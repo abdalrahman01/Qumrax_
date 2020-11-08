@@ -38,7 +38,8 @@ class MapOutResults: View {
         for (x in 0 until NUM_OBJECTS_DETECTED){
             val value =  elements[x]
             if (value?.getScore()!! > THRESHOLD){
-                val location = value.getLocation()
+
+                val location = rotateRect(value.getLocation())
                 val label = "${value.getTitle_()} ${value.getScore().times(100).toInt()}%"
 
                 canvas?.apply {
@@ -49,6 +50,14 @@ class MapOutResults: View {
             }
         }
     }
+
+    private fun rotateRect(location: RectF): RectF {
+        //rotate the Rectangle
+
+
+        return location
+    }
+
     fun drawOnScreen(element: List<Classifier.Recognition?>? , window: PreviewView){
 
         elements.clear()

@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
 
         if (context.resources.configuration.orientation == 1){
             Toast.makeText(
-                this,
+                context,
                 getString(R.string.best_option),
                 Toast.LENGTH_LONG
             ).show()
@@ -151,12 +151,10 @@ class MainActivity : AppCompatActivity() {
                 cameraProvider.unbindAll()
                 // Bind use cases to camera
                 cameraProvider.bindToLifecycle(
-                    this, cameraSelector, preview, imageCapture, imageAnalyzer
+                    context, cameraSelector, preview, imageCapture, imageAnalyzer
                 )
-            } catch (exc: Exception) {
-
-            }
-        }, ContextCompat.getMainExecutor(this))
+            } catch (exc: Exception) { }
+        }, ContextCompat.getMainExecutor(context))
     }
     override fun onDestroy() {
         super.onDestroy()
@@ -167,12 +165,12 @@ class MainActivity : AppCompatActivity() {
         permissions: Array<String>,
         grantResults: IntArray
     ) {
-        if (Permissions.shouldShowRequestPermissionRationale(this)) {
-            if (Permissions.hasCameraPermission(this)) {
+        if (Permissions.shouldShowRequestPermissionRationale(context)) {
+            if (Permissions.hasCameraPermission(context)) {
                 openCamera()
             } else {
                 Toast.makeText(
-                    this,
+                    context,
                     "Permissions not granted by the user.",
                     Toast.LENGTH_SHORT
                 ).show()
