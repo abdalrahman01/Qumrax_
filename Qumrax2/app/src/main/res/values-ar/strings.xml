@@ -6,4 +6,6 @@
     <string name="best_option">أفضل في وضع الشاشة العريضية</string>
     <string name="object_to_be_detected">عدد الاشياء</string>
     <string name="full_screen_mode">وضع ملء الشاشة</string>
+    <string name="permission_not_granted">لم يُسمح للوصول للكامرا من قبل المسنخدم</string>
+    <string name="grant_permission">ائذن</string>
 </resources>

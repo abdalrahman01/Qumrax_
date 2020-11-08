@@ -14,13 +14,14 @@
 
 
         tools:ignore="HardcodedDebugMode">
-        <activity android:name=".MainActivity" android:configChanges="orientation">
+        <activity android:name=".MainActivity" android:configChanges="orientation" android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-feature android:name="android.hardware.camera2"/>

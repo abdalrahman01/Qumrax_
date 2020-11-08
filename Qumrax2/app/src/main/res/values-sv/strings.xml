@@ -6,4 +6,6 @@
     <string name="about">om</string>
     <string name="best_option">Det är bättre i landskapsläge</string>
     <string name="full_screen_mode">Fullskärmsläge</string>
+    <string name="permission_not_granted">Kamran kan inte nås på grund av användaren.</string>
+    <string name="grant_permission">Ge tillstånd</string>
 </resources>

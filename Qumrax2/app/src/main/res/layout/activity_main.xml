@@ -13,16 +13,36 @@
     <androidx.camera.view.PreviewView
         android:id="@+id/viewx"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/noPermission"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="376dp"
+                android:layout_height="134dp"
+                android:text="@string/permission_not_granted"
+                android:textColor="#FFFFFF"
+                android:textSize="36sp" />
+
+            <Button
+                android:id="@+id/grant_permission_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/grant_permission" />
+        </LinearLayout>
 
     </androidx.camera.view.PreviewView>
 
     <xyz.abdalrahman.qumrax2.MapOutResults
         android:id="@+id/mapOut"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="match_parent" />
 
     <Switch
         android:id="@+id/switch1"
@@ -54,9 +74,8 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:max="100"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:progress="45"
-            />
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
             android:id="@+id/object_to_be_detected"
@@ -71,12 +90,10 @@
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:max="8"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:progress="8"/>
+            android:progress="8"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
     </LinearLayout>
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

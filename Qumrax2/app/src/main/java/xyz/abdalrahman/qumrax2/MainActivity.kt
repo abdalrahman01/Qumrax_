@@ -30,6 +30,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 import org.tensorflow.lite.support.common.FileUtil
 import xyz.abdalrahman.qumrax2.ml.SsdMobilenetV11Metadata1
+import java.lang.Thread.sleep
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
@@ -39,8 +40,6 @@ class MainActivity : AppCompatActivity() {
     private val context = this@MainActivity
     private lateinit var cameraExecutor: ExecutorService
     private val labelsPath by lazy { FileUtil.loadLabels(this, "labels.txt") }
-
-    private var isFullScreen = true
     // Select back camera as a default
     private val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
     @SuppressLint("SetTextI18n")
@@ -55,11 +54,18 @@ class MainActivity : AppCompatActivity() {
                 Toast.LENGTH_LONG
             ).show()
         }
+        grant_permission_btn.setOnClickListener {
+            Permissions.launchPermissionSettings(context)
+        }
+
 
         if (Permissions.hasCameraPermission(context)) {
             openCamera()
         } else {
+
             Permissions.requestCameraPermission(context)
+            sleep(2000)
+            openCamera()
         }
         cameraExecutor = Executors.newSingleThreadExecutor()
 
@@ -102,6 +108,16 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (Permissions.hasCameraPermission(context)) {
+            noPermission.visibility = GONE
+        } else {
+            noPermission.visibility = VISIBLE
+        }
+        openCamera()
     }
 
 
@@ -172,10 +188,10 @@ class MainActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(
                     context,
-                    "Permissions not granted by the user.",
-                    Toast.LENGTH_SHORT
+                    getString(R.string.permission_not_granted),
+                    Toast.LENGTH_LONG
                 ).show()
-                finish()
+                Permissions.launchPermissionSettings(context)
             }
         }
     }
