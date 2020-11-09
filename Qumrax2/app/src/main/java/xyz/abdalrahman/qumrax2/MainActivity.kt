@@ -274,8 +274,6 @@ class MainActivity : AppCompatActivity() {
                 or SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
         if (isPortrait())
             sittings.translationY = -100F
-        if (!isPortrait())
-            switch1.translationX = -100f
         sittings.visibility = VISIBLE
 
     }

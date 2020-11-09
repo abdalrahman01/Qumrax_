@@ -49,6 +49,8 @@
         android:layout_height="wrap_content"
         android:text="@string/full_screen_mode"
         android:textAlignment="center"
+        android:translationX="-40dp"
+        android:translationY="-40dp"
         app:layout_constraintBottom_toTopOf="@+id/sittings"
         app:layout_constraintEnd_toEndOf="@+id/viewx" />
 
