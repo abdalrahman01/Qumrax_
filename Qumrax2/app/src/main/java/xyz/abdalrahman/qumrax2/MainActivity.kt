@@ -60,17 +60,15 @@ class MainActivity : AppCompatActivity() {
 
 
         if (Permissions.hasCameraPermission(context)) {
+            noPermission.visibility = GONE
             openCamera()
         } else {
 
             Permissions.requestCameraPermission(context)
             sleep(2000)
-            if (!Permissions.hasCameraPermission(context)){
-                // TODO(test)
-                noPermission.visibility = VISIBLE
-            } else {
-                openCamera()
-            }
+            if (Permissions.hasCameraPermission(context))
+                noPermission.visibility = GONE
+
 
         }
         cameraExecutor = Executors.newSingleThreadExecutor()
@@ -118,11 +116,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        if (Permissions.hasCameraPermission(context)) {
-            noPermission.visibility = GONE
-        } else {
-            noPermission.visibility = VISIBLE
-        }
+
         openCamera()
     }
 
@@ -179,7 +173,7 @@ class MainActivity : AppCompatActivity() {
                             val process = model.predict(scaledBitmap)
                             if (process != null) {
                                 // pass the value to custom view MapOutResults
-                                // TODO(pass the viewx in constructor)
+
                                 mapOut.drawOnScreen(process, viewx)
                             }
                             // close the frame to make room for next frame
@@ -215,6 +209,7 @@ class MainActivity : AppCompatActivity() {
 
         if (Permissions.shouldShowRequestPermissionRationale(context)) {
             if (Permissions.hasCameraPermission(context)) {
+                noPermission.visibility = GONE
                 openCamera()
             } else {
                 Toast.makeText(
@@ -222,8 +217,7 @@ class MainActivity : AppCompatActivity() {
                     getString(R.string.permission_not_granted),
                     Toast.LENGTH_LONG
                 ).show()
-                // TODO(test)
-                noPermission.visibility = VISIBLE
+
             }
         }
     }

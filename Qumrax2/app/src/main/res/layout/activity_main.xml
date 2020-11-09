@@ -15,34 +15,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/noPermission"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="gone">
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="376dp"
-                android:layout_height="134dp"
-                android:text="@string/permission_not_granted"
-                android:textColor="#FFFFFF"
-                android:textSize="36sp" />
-
-            <Button
-                android:id="@+id/grant_permission_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/grant_permission" />
-        </LinearLayout>
-
     </androidx.camera.view.PreviewView>
 
     <xyz.abdalrahman.qumrax2.MapOutResults
         android:id="@+id/mapOut"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/noPermission"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="376dp"
+            android:layout_height="134dp"
+            android:text="@string/permission_not_granted"
+            android:textColor="#FFFFFF"
+            android:textSize="36sp" />
+
+        <Button
+            android:id="@+id/grant_permission_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/grant_permission" />
+    </LinearLayout>
 
     <Switch
         android:id="@+id/switch1"
