@@ -1,0 +1,19 @@
+server {
+	listen 80;
+	server_name abdalrahman.xyz;
+
+	location /static {
+		alias /home/ubuntu/Qumrax/web_app/static;
+	}
+
+
+	location / {
+		proxy_pass http://localhost:8000;
+		include /etc/nginx/proxy_params;
+		proxy_redirect off;
+
+	}
+
+
+
+}
