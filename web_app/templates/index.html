@@ -55,26 +55,18 @@
         </section>
 
         <div class="text-center">
+            
             <div class="row">
                 <div class="col-sm">
-                    <img src="https://i.imgur.com/PG0Ffwp.jpg" alt=""
-                        height="400">
+                    <img src="https://i.imgur.com/PG0Ffwp.jpg" alt="" height="400">
                 </div>
                 <div class="col-sm">
                     <img src="https://i.imgur.com/WhUJBRI.jpg" alt="" height="400">
                 </div>
 
-                
-                    <div class="col-sm">
-                        <div class="row">
-                            <img src="https://i.imgur.com/C2JDN3N.jpg" alt="" width="400">
-                        </div>
-                        <br>
-                        <div class="row">
-                            <img src="https://i.imgur.com/X2ue1D5.jpg" alt="" width="400">
-                        </div>
-                    </div>
-                  
+
+               
+
 
             </div>
         </div>
@@ -89,6 +81,24 @@
                     Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Etiam
                     fermentum odio sed sapien molestie, id feugiat massa laoreet. Phasellus et velit quis odio eleifend
                     fringilla. Donec hendrerit nisl et elit pretium suscipit.</p>
+                <h1 class="display-4">What Can I See?</h1>
+               
+                <ul class="list-group list-group-horizontal">
+                 
+                    <ul class="list-group list-group-flush">
+                    {% for label in labels %}
+
+                    {% if label != "???\n" %}
+                    <li class="list-group-item">{{label}}</li>
+                 
+                    {% endif %}
+                   
+                        
+                    
+                    {% endfor %}
+                </ul>
+                        
+                </ul>
             </div>
         </div>
 

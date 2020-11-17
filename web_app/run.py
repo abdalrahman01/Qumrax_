@@ -4,12 +4,15 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
    
+  with open("static/label.txt", "r") as labels:
+    
+    return render_template('index.html', labels = labels)
+
 
 @app.route("/download")
 def download():
    return send_file("app-release.apk", as_attachment=True)
 
 if __name__ == '__main__':
-  app.run()
+  app.run(debug=True)
